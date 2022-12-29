@@ -2,7 +2,7 @@
   text-align: center;
 }
 
-.App-header {
+.container {
   background-color: #eeeeeb;
   min-height: 100vh;
   display: flex;
@@ -11,4 +11,53 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: black;
+}
+
+.input_inline {
+  display: inline;
+}
+.input_blk text {
+  font-size: 12px;
+  font-weight: 600;
+  padding-left: 10px;
+}
+.input_name,
+.input_goal {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgb(204, 204, 204);
+  margin: 0 8px 0 8px;
+  width: 300px;
+}
+.input_name:focus,
+.input_goal:focus {
+  outline: 1px solid #0c0adb;
+  box-shadow: 0px 0px 2px 2px #a6a1e750;
+}
+.input_name {
+  width: 114px;
+}
+.circle-picker {
+  display: block;
+  margin: 0 8px;
+  background-color: white;
+  height: max-content;
+  padding: 14px 40px 0px 58px;
+  border-radius: 8px;
+  border: 1px solid rgb(204, 204, 204);
+  text-align: center;
+}
+
+.submit {
+  margin: 20px 0 0 0;
+  background-color: #192e67;
+  color: white;
+  font-weight: bold;
+  border-radius: 6px;
+  border: 1px solid #192e67;
+  cursor: pointer;
+}
+.submit:hover {
+  outline: 1px solid rgb(204, 204, 204);
+  box-shadow: 0px 0px 2px 2px #7175b330;
 }
