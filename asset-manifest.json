@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/hpny/static/css/main.977d9a8e.css",
+    "main.js": "/hpny/static/js/main.e71b3263.js",
+    "static/media/passport-open.svg": "/hpny/static/media/passport-open.d44cc461670ffdb14f437acb3c2286d5.svg",
+    "static/media/Ticket.svg": "/hpny/static/media/Ticket.39b3cb234dc16526b604a48a3e0ccf93.svg",
+    "static/media/passport.svg": "/hpny/static/media/passport.2d670b2b70cbb433ca72a22ab4798c12.svg",
+    "index.html": "/hpny/index.html",
+    "main.977d9a8e.css.map": "/hpny/static/css/main.977d9a8e.css.map",
+    "main.e71b3263.js.map": "/hpny/static/js/main.e71b3263.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.977d9a8e.css",
+    "static/js/main.e71b3263.js"
+  ]
+}
