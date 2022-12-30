@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react";
+
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+
+import "./App.css";
+
 import { ReactComponent as Ticket } from "./images/Ticket.svg";
 import { ReactComponent as Passport } from "./images/passport.svg";
 import { ReactComponent as Passport_Open } from "./images/passport-open.svg";
-import "./App.css";
 
 import { CirclePicker } from "react-color";
 
@@ -13,7 +18,7 @@ function App() {
 
   const [surname, setSurname] = useState("");
   const [givenname, setGivenname] = useState("");
-  const [goal, setGoal] = useState("BYE 2022 HELLO 2023");
+  const [goal, setGoal] = useState("");
   const [ticketColor, setTicketColor] = useState("#B0C3F4");
 
   useEffect(() => {
@@ -21,11 +26,9 @@ function App() {
   }, [passportVisible]);
 
   useEffect(() => {
-    if (passportOpen) {
-      ShowPassportOpenContent();
-      displayFLines();
-    }
-  }, [surname, goal]);
+    displaySurname();
+    displayFLines();
+  }, [surname]);
 
   useEffect(() => {
     displayGivenname();
@@ -33,6 +36,7 @@ function App() {
   }, [givenname]);
 
   useEffect(() => {
+    displayGoal();
     displaySLines();
   }, [goal]);
 
@@ -112,16 +116,12 @@ function App() {
     }
   }
 
-  function ShowPassportOpenContent() {
+  function displaySurname() {
     let svg = document.getElementById("passport-open");
     if (svg != null) {
       let i = 0;
       svg.childNodes.forEach((elem) => {
-        if (
-          elem.getAttribute("id") === "surname" ||
-          elem.getAttribute("id") === "givenname" ||
-          elem.getAttribute("id") === "goal"
-        ) {
+        if (elem.getAttribute("id") === "surname") {
           svg.removeChild(svg.childNodes[i]);
         }
         i++;
@@ -138,18 +138,19 @@ function App() {
       _surname.style.font = "600 14px Inter";
       _surname.innerHTML = surname.toUpperCase();
       svg.appendChild(_surname);
+    }
+  }
 
-      let _given = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "text"
-      );
-      _given.setAttribute("id", "givenname");
-      _given.setAttribute("x", 174);
-      _given.setAttribute("y", 465);
-      _given.style.fill = "black";
-      _given.style.font = "600 14px Inter";
-      _given.innerHTML = givenname.toUpperCase();
-      svg.appendChild(_given);
+  function displayGoal() {
+    let svg = document.getElementById("passport-open");
+    if (svg != null) {
+      let i = 0;
+      svg.childNodes.forEach((elem) => {
+        if (elem.getAttribute("id") === "goal") {
+          svg.removeChild(svg.childNodes[i]);
+        }
+        i++;
+      });
 
       let _goal = document.createElementNS(
         "http://www.w3.org/2000/svg",
@@ -197,7 +198,6 @@ function App() {
         "text"
       );
 
-      // 309/2 -
       _goal.setAttribute("id", "name");
       _goal.setAttribute("x", "50%");
       _goal.setAttribute("y", 462);
@@ -233,7 +233,8 @@ function App() {
   function init() {
     setSurname("");
     setGivenname("");
-    setGoal("BYE 2022 HELLO 2023");
+    setGoal("");
+    setTicketColor("#B0C3F4");
 
     let svg = document.getElementById("passport-open");
     if (svg != null) {
@@ -252,72 +253,118 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <div className="container">
+    <Box sx={{ flexGrow: 1 }}>
+      <Grid
+        container
+        alignItems={"center"}
+        textAlign={"center"}
+        justifyContent={"center"}
+        style={{
+          minHeight: "100vh",
+          paddingTop: 0,
+        }}
+      >
         {passportVisible ? (
           <>
             {!passportOpen ? (
-              <button
-                style={{
-                  border: "none",
-                  background: "transparent",
-                  margin: "0",
-                  cursor: "pointer",
-                }}
-                onClick={openPassport}
-              >
-                <Passport stroke={passportColor} fill={passportColor} />
-              </button>
-            ) : (
-              <>
+              <Grid>
+                <div className="App-header">
+                  <text
+                    style={{
+                      fontSize: "2em",
+                      fontWeight: "bold",
+                      backgroundColor: "#192e67",
+                      color: "white",
+                      paddingRight: "12px",
+                      paddingLeft: "12px",
+                    }}
+                  >
+                    ON BOARDING
+                  </text>
+                </div>
                 <button
                   style={{
                     border: "none",
                     background: "transparent",
                     margin: "0",
                     cursor: "pointer",
+                    marginTop: "4em",
                   }}
                   onClick={openPassport}
                 >
-                  <Passport_Open />
+                  <Passport stroke={passportColor} fill={passportColor} />
                 </button>
-                <div style={{}}>
-                  <div className="input_blk">
-                    <div className="input_inline">
-                      <text style={{ marginRight: "12px" }}>성</text>
-                      <input
-                        className="input_name"
-                        value={surname}
-                        onChange={onChangeSurname}
-                        placeholder="Surname"
-                        minLength={1}
-                      />
-                    </div>
-                    <div className="input_inline">
-                      <text>이름</text>
-                      <input
-                        className="input_name"
-                        value={givenname}
-                        onChange={onChangeGivenname}
-                        placeholder="Given name"
-                        minLength={1}
-                      />
-                    </div>
+              </Grid>
+            ) : (
+              <>
+                <Grid
+                  xs={12}
+                  md={6}
+                  textAlign={"center"}
+                  alignItems={"center"}
+                  justifyContent={"center"}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      padding: "0.2em 0",
+                      fontSize: "2em",
+                      fontWeight: "bold",
+                      backgroundColor: "#192e67",
+                      color: "white",
+                      justifyContent: "center",
+                      marginTop: 0,
+                    }}
+                  >
+                    <text>PASSPORT</text>
                   </div>
-                  <div className="input_blk">
-                    <text>목표</text>
+                  <button
+                    style={{
+                      border: "none",
+                      background: "transparent",
+                      margin: "16px 0 4px 0",
+                      cursor: "pointer",
+                    }}
+                    onClick={openPassport}
+                  >
+                    <Passport_Open />
+                  </button>
+                </Grid>
+                <Grid
+                  xs={12}
+                  md={6}
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <Grid>
+                    <input
+                      className="input_name"
+                      value={surname}
+                      onChange={onChangeSurname}
+                      placeholder="성/ Surname"
+                      minLength={1}
+                    />
+                    <input
+                      className="input_name"
+                      value={givenname}
+                      onChange={onChangeGivenname}
+                      placeholder="이름/ Given name"
+                      minLength={1}
+                    />
+                  </Grid>
+                  <Grid>
                     <input
                       className="input_goal"
                       value={goal}
                       onChange={onChangeGoal}
-                      placeholder="BYE 2022 HELLO 2023"
+                      placeholder="목표/ Goal"
                       maxlength={22}
                     />
-                  </div>
-                  <div className="input_blk">
-                    <text>티켓 색상</text>
+                  </Grid>
+                  <Grid className="color-picker">
                     <CirclePicker
-                      className="colorpicker"
                       color={ticketColor}
                       onChangeComplete={(c) => {
                         setTicketColor(c.hex);
@@ -343,38 +390,114 @@ function App() {
                         "#FFC7E9",
                       ]}
                     />
-                  </div>
-                  <button
-                    className="submit"
-                    onClick={() => {
-                      onClickSubmit();
-                    }}
-                    style={{ width: "80px", height: "30px" }}
-                  >
-                    티켓발행
-                  </button>
-                </div>
+                  </Grid>
+                  <Grid backgroundColor={"#f1f1f1"}>
+                    <button
+                      className="submit"
+                      onClick={() => {
+                        onClickSubmit();
+                      }}
+                      style={{
+                        width: "310px",
+                        height: "30px",
+                        marginTop: "2.3em",
+                      }}
+                    >
+                      티켓발행
+                    </button>
+                  </Grid>
+                </Grid>
               </>
             )}
           </>
         ) : (
-          <>
-            {console.log("col", ticketColor)}
-            <Ticket fill={ticketColor} />
+          <Grid
+            alignItems={"center"}
+            textAlign={"center"}
+            justifyContent={"center"}
+            style={{
+              paddingTop: "8px",
+              justifyContent: "center",
+            }}
+          >
+            <div
+              style={{
+                textAlign: "center",
+                fontSize: "2em",
+                fontWeight: "bold",
+                backgroundColor: "#192e67",
+                color: "white",
+                width: "100%",
+                whiteSpace: "pre-wrap",
+              }}
+            >
+              {"YOUR TICKET \nTO NEW YEAR"}
+            </div>
+            <Ticket fill={ticketColor} style={{ margin: "3em 0" }} />
             <button
               className="submit"
               onClick={() => {
                 onClickSubmit();
                 init();
               }}
-              style={{ width: "80px", height: "30px" }}
+              style={{
+                width: "100%",
+                height: "36px",
+                position: "relative",
+                bottom: "-1em",
+              }}
             >
               처음으로
             </button>
-          </>
+          </Grid>
         )}
-      </div>
-    </div>
+      </Grid>
+
+      <footer
+        style={{
+          position: "fixed",
+          bottom: -6,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          width: "100%",
+          color: "#192e6730",
+          paddingTop: "1em",
+          paddingBottom: "1em",
+          alignItems: "center",
+          zIndex: -2,
+        }}
+      >
+        <text
+          style={{
+            fontSize: "1em",
+            fontWeight: "bold",
+            paddingRight: "12px",
+            paddingLeft: "12px",
+          }}
+        >
+          HAPPY NEW YEAR
+        </text>
+        <text
+          style={{
+            fontSize: "8px",
+            paddingRight: "12px",
+            paddingLeft: "12px",
+          }}
+        >
+          하는 일마다 모두 잘 풀리길.
+        </text>
+        <text
+          style={{
+            fontSize: "8px",
+            paddingRight: "12px",
+            paddingLeft: "12px",
+          }}
+        >
+          개발자: @soyang.log
+        </text>
+      </footer>
+    </Box>
   );
 }
 
